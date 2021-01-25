@@ -8,9 +8,6 @@ import org.springframework.core.type.classreading.MetadataReaderFactory
 @SpringBootApplication
 class App {
 
-    @Autowired
-    lateinit var a:MetadataReaderFactory
-
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {

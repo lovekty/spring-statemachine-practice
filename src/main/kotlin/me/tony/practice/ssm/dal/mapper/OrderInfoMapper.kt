@@ -3,7 +3,7 @@
  */
 package me.tony.practice.ssm.dal.mapper
 
-import me.tony.practice.ssm.dal.entity.ItemInfoRecord
+import me.tony.practice.ssm.dal.entity.OrderInfoRecord
 import org.apache.ibatis.annotations.DeleteProvider
 import org.apache.ibatis.annotations.InsertProvider
 import org.apache.ibatis.annotations.Mapper
@@ -21,7 +21,7 @@ import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter
 
 @Mapper
-interface ItemInfoMapper {
+interface OrderInfoMapper {
     @SelectProvider(type=SqlProviderAdapter::class, method="select")
     fun count(selectStatement: SelectStatementProvider): Long
 
@@ -30,24 +30,24 @@ interface ItemInfoMapper {
 
     @InsertProvider(type=SqlProviderAdapter::class, method="insert")
     @SelectKey(statement=["SELECT LAST_INSERT_ID()"], keyProperty="record.id", before=false, resultType=Long::class)
-    fun insert(insertStatement: InsertStatementProvider<ItemInfoRecord>): Int
+    fun insert(insertStatement: InsertStatementProvider<OrderInfoRecord>): Int
 
     @SelectProvider(type=SqlProviderAdapter::class, method="select")
-    @ResultMap("ItemInfoRecordResult")
-    fun selectOne(selectStatement: SelectStatementProvider): ItemInfoRecord?
+    @ResultMap("OrderInfoRecordResult")
+    fun selectOne(selectStatement: SelectStatementProvider): OrderInfoRecord?
 
     @SelectProvider(type=SqlProviderAdapter::class, method="select")
-    @Results(id="ItemInfoRecordResult", value = [
+    @Results(id="OrderInfoRecordResult", value = [
         Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        Result(column="item_name", property="itemName", jdbcType=JdbcType.VARCHAR),
-        Result(column="item_state", property="itemState", jdbcType=JdbcType.INTEGER),
-        Result(column="item_type", property="itemType", jdbcType=JdbcType.INTEGER),
-        Result(column="item_description", property="itemDescription", jdbcType=JdbcType.VARCHAR),
+        Result(column="order_spu_info", property="orderSpuInfo", jdbcType=JdbcType.VARCHAR),
+        Result(column="order_sku_info", property="orderSkuInfo", jdbcType=JdbcType.VARCHAR),
+        Result(column="order_state", property="orderState", jdbcType=JdbcType.INTEGER),
+        Result(column="order_type", property="orderType", jdbcType=JdbcType.INTEGER),
         Result(column="add_time", property="addTime", jdbcType=JdbcType.TIMESTAMP),
         Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         Result(column="is_visible", property="visible", jdbcType=JdbcType.BIT)
     ])
-    fun selectMany(selectStatement: SelectStatementProvider): List<ItemInfoRecord>
+    fun selectMany(selectStatement: SelectStatementProvider): List<OrderInfoRecord>
 
     @UpdateProvider(type=SqlProviderAdapter::class, method="update")
     fun update(updateStatement: UpdateStatementProvider): Int

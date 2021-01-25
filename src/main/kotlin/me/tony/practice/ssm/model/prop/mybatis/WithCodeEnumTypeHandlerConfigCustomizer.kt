@@ -19,7 +19,7 @@ import java.util.*
 /**
  * @author tony.zhuby
  */
-class WithCodeEnumTypeHandlerConfigCustomizer(private val packages: Set<String>) : ConfigurationCustomizer,
+class WithCodeEnumTypeHandlerConfigCustomizer(private val packages: Set<String> = setOf("me.tony.practice.sm.model.prop")) : ConfigurationCustomizer,
     ApplicationContextAware {
 
     private lateinit var context: ApplicationContext
